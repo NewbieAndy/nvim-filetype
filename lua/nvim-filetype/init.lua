@@ -36,15 +36,6 @@ function M.show_selector(opts)
 	-- Create a popup menu with filetype options
 	local prompt_opts = {
 		prompt = "Select Filetype: ",
-		completion = function(input)
-			local matches = {}
-			for _, ft in ipairs(filetypes) do
-				if ft:find(input) then
-					table.insert(matches, ft)
-				end
-			end
-			return matches
-		end,
 		format_item = function(item)
 			if item == vim.bo.filetype then
 				return item .. " " .. opts.selected_icon
