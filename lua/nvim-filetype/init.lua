@@ -32,12 +32,14 @@ end
 ---@param opts nvim-filetype.config
 function M.show_selector(opts)
 	local filetypes = M.get_filetypes(opts)
+	-- Capture the current filetype before showing the selector
+	local current_filetype = vim.bo.filetype
 
 	-- Create a popup menu with filetype options
 	local prompt_opts = {
 		prompt = "Select Filetype: ",
 		format_item = function(item)
-			if item == vim.bo.filetype then
+			if item == current_filetype then
 				return item .. " " .. opts.selected_icon
 			else
 				return item
