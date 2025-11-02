@@ -2,7 +2,7 @@ local default_config = require("nvim-filetype.config")
 
 local M = {}
 
----@Param opts nvim-filetype.config
+---@param opts nvim-filetype.config
 function M.get_filetypes(opts)
 	local selectable_fts = {}
 	local config_fts_dict = {}
@@ -26,10 +26,10 @@ function M.get_filetypes(opts)
 end
 
 function M.update_ft(new_ft)
-	vim.api.nvim_buf_set_option(0, "filetype", new_ft)
+	vim.bo[0].filetype = new_ft
 end
 
----@Param opts nvim-filetype.config
+---@param opts nvim-filetype.config
 function M.show_selector(opts)
 	local filetypes = M.get_filetypes(opts)
 
@@ -52,7 +52,7 @@ function M.show_selector(opts)
 	end)
 end
 
----@Param options nvim-filetype.config
+---@param options nvim-filetype.config
 function M.setup(options)
 	options = vim.tbl_deep_extend("force", default_config, options or {})
 	vim.api.nvim_create_user_command("FTSelect", function()
